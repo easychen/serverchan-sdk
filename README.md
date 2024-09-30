@@ -49,6 +49,8 @@ npm install serverchan-sdk
 ### 调用实例
 
 ```js
+import {scSend} from 'serverchan-sdk'; 
+
 const sendkey = '...'; // 替换成真实的 Server 酱 sendkey
 const title = 'Test Notification';
 const desp = 'This is a test message';
