@@ -14,26 +14,21 @@ Server酱SDK
 
 ```jsonc
 {
-    /** SC3专用：标签列表，多个标签使用竖线分隔 */
-    tags?: string;
-    /** SC3和SCT：消息卡片的简短描述 */
-    short?: string;
-    /** SCT：是否隐藏调用IP，1为隐藏 */
-    noip?: 1;
-    /** SCT：推送使用的消息通道，多个通道值用竖线隔开 */
-    channel?: string;
-    /** SCT：消息抄送的 openid，多个 openid 用逗号或竖线分隔 */
-    openid?: string;
+    tags?: string; // SC3专用：标签列表，多个标签使用竖线分隔 
+    short?: string; // SC3和SCT：消息卡片的内容，特别适用desp为markdown时，
+    noip?: 1; // SCT专用：是否隐藏调用IP，1为隐藏
+    channel?: string; // SCT专用：推送使用的消息通道，多个通道值用竖线隔开
+    openid?: string; // SCT专用：消息抄送的 openid，仅用于企业微信应用消息和测试号通道，多个 openid 用逗号或竖线分隔
 }
 ```
 
 返回格式定义：
 
-```json
+```jsonc
 {
-    code: number;/** 返回的状态码, 0 为正确 */
-    message: string;/** 返回的信息，和状态码对应 */
-    data?: any; /** 可选的返回数据，SCT和SC3这部分格式不同 */
+    code: number; // 返回的状态码, 0 为正确 
+    message: string;  // 返回的信息，和状态码对应
+    data?: any;  // 可选的返回数据，SCT和SC3这部分格式不同
 }
 ```
 以下是各个语言的SDK及其用法，点击查看详细
@@ -195,6 +190,72 @@ void main() async {
 }
 ```
 </details>
+
+## 没有覆盖的语言
+
+如果您使用的语言没有SDK，您可以把以下提示词粘贴到 ChatGPT/Claude/DeepSeek/Kimi，让AI立马帮你写一个。
+
+```
+请参考以下TypeScript代码，编写<xxx语言>对应的实现：
+
+\`\`\`typescript
+import fetch from 'cross-fetch';
+
+// ScSendOptions 定义了推送函数的可选参数
+export interface ScSendOptions {
+    /** sctp 专用：标签列表，多个标签使用竖线分隔 */
+    tags?: string;
+    /** sctp 和非 sctp：消息卡片的简短描述 */
+    short?: string;
+    /** 非 sctp：是否隐藏调用IP，1为隐藏 */
+    noip?: 1;
+    /** 非 sctp：推送使用的消息通道，多个通道值用竖线隔开 */
+    channel?: string;
+    /** 非 sctp：消息抄送的 openid，多个 openid 用逗号或竖线分隔 */
+    openid?: string;
+}
+
+// ScSendResponse 定义了推送函数返回的响应结果
+export interface ScSendResponse {
+    /** 返回的状态码 */
+    code: number;
+    /** 返回的消息 */
+    message: string;
+    /** 可选的返回数据 */
+    data?: any;
+}
+
+// 调用 Server 酱的推送函数
+export async function scSend(
+    sendkey: string,
+    title: string,
+    desp: string = '',
+    options: ScSendOptions = {}
+): Promise<ScSendResponse> {
+    
+    const url = sendkey.startsWith('sctp') 
+        ? `https://${sendkey}.push.ft07.com/send`
+        : `https://sctapi.ftqq.com/${sendkey}.send`;
+    
+    const params = {
+        title,
+        desp,
+        ...options,
+    };
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(params),
+    });
+
+    const result = await response.json() as ScSendResponse;
+    return result;
+}
+\`\`\`
+```
 
 
 
