@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NPM包测试</title>
+</head>
+<body>
+    <h1>测试 scSend 函数</h1>
+    <form id="sendForm">
+        <label for="sendkey">SendKey:</label>
+        <input type="text" id="sendkey" name="sendkey" required><br><br>
+
+        <label for="title">标题:</label>
+        <input type="text" id="title" name="title" required><br><br>
+
+        <label for="desp">描述:</label>
+        <textarea id="desp" name="desp"></textarea><br><br>
+
+        <button type="submit">发送</button>
+    </form>
+
+    <h2>响应结果:</h2>
+    <pre id="response"></pre>
+
+    <script type="module">
+        import { scSend } from 'https://unpkg.com/serverchan-sdk';
+
+
+        const form = document.getElementById('sendForm');
+        const responsePre = document.getElementById('response');
+
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const sendkey = document.getElementById('sendkey').value;
+            const title = document.getElementById('title').value;
+            const desp = document.getElementById('desp').value;
+
+            try {
+                const result = await scSend(sendkey, title, desp);
+                responsePre.textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                responsePre.textContent = '发送失败: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html>

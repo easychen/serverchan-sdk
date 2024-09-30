@@ -1,0 +1,25 @@
+{
+  "name": "serverchan-sdk",
+  "version": "1.0.5",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "require": "./dist/index.cjs",
+    "import": "./dist/index.mjs",
+    "types": "./dist/index.d.ts" 
+  },
+  "type": "module",
+  "scripts": {
+    "build": "cp src/index.d.ts dist/ && rollup -c"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "rollup": "^3.29.5",
+    "rollup-plugin-esbuild": "^6.1.1"
+  },
+  "dependencies": {
+    "cross-fetch": "^4.0.0"
+  }
+}

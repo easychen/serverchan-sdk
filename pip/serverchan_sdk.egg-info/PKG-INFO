@@ -1,0 +1,11 @@
+Metadata-Version: 1.2
+Name: serverchan-sdk
+Version: 1.0.2
+Summary: Python SDK for ServerChan
+Home-page: https://sct.ftqq.com
+Author: easychen
+Author-email: easychen@gmail.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >=3.6
