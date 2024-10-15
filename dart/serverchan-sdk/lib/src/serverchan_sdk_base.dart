@@ -49,8 +49,16 @@ Future<ScSendResponse> scSend(
   client ??= http.Client();
 
   String url;
+  // 根据 sendkey 构建 URL，检查是否以 'sctp' 开头
   if (sendkey.startsWith('sctp')) {
-    url = 'https://$sendkey.push.ft07.com/send';
+    // 使用正则表达式提取数字部分
+    final match = RegExp(r'^sctp(\d+)t').firstMatch(sendkey);
+    if (match != null) {
+      String numPart = match.group(1)!;
+      url = 'https://$numPart.push.ft07.com/send/$sendkey.send';
+    } else {
+      throw ArgumentError('Invalid sendkey format');
+    }
   } else {
     url = 'https://sctapi.ftqq.com/$sendkey.send';
   }

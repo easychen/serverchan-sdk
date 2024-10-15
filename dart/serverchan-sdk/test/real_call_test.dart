@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 void main() {
   // Replace this with your actual SendKey
-  const sendkey = 'sctp4'; // 必须是有效的 sendkey
+  const sendkey = 'sctp'; // 必须是有效的 sendkey
 
   group('Real API Call', () {
     test(

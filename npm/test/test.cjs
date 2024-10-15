@@ -1,6 +1,6 @@
 // cjsTest.js
 
-const { scSend } = require('serverchan-sdk');  // 请根据实际模块路径替换
+const { scSend } = require('../src/index.js');  // 请根据实际模块路径替换
 
 (async () => {
     try {

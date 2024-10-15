@@ -1,4 +1,4 @@
-import { scSend } from 'serverchan-sdk';  // 请根据实际模块路径替换
+import { scSend } from '../src/index.js';  // 请根据实际模块路径替换
 
 (async () => {
     try {
