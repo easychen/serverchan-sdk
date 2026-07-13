@@ -1,4 +1,4 @@
-import fetch from 'cross-fetch';
+// 使用运行时内置的全局 fetch（Node 18+ / Cloudflare Workers / Deno / Bun / 浏览器均已内置）
 
 // 调用 Server 酱的推送函数
 export async function scSend(sendkey, title, desp = '', options = {}) {

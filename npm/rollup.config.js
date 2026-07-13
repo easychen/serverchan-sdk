@@ -12,7 +12,6 @@ export default {
       format: 'esm'
     }
   ],
-  external: ['cross-fetch'],
   plugins: [
     esbuild({
       minify: true,  // 开启压缩
